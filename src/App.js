@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+
+import './css/App.css';
+import Header from "./components/Header";
+import BalanceSummary from "./components/BalanceSummary";
+import ExpenseForm from "./components/ExpenseForm";
+import ExpenseList from "./components/ExpenseList";
+import CategorySummary from "./components/CategorySummary";
+import MenuDrawer from "./components/MenuDrawer";
+import FabButton from "./components/FabButton";
+import ChartView from "./components/ChartView";
+import ChartToggleButton from "./components/ChartToggleButton";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [showChart, setShowChart] = useState(false);
+
+    return (
+        <div className="app-container">
+            <MenuDrawer/>
+            <Header/>
+            <main className="main-content">
+                <BalanceSummary/>
+                <ExpenseForm/>
+                <ExpenseList/>
+                <CategorySummary/>
+                <FabButton onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}/>
+                {showChart && <ChartView/>}
+                <ChartToggleButton showChart={showChart} onClick={() => setShowChart(!showChart)} />
+            </main>
+        </div>
+    );
 }
 
 export default App;

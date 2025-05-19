@@ -1,0 +1,9 @@
+.category-summary {
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+.category-food { box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); }
+.category-bills { box-shadow: 0 0 10px rgba(0, 255, 255, 0.6); }

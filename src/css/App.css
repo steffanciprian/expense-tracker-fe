@@ -16,3 +16,15 @@ body {
     border-radius: 16px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
+.main-content {
+    padding-bottom: 120px;
+}
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 200;
+}

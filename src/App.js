@@ -23,10 +23,13 @@ function App() {
                 <ExpenseForm/>
                 <ExpenseList/>
                 <CategorySummary/>
+            </main>
+            <div className="fab-container">
                 <FabButton onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}/>
                 {showChart && <ChartView/>}
-                <ChartToggleButton showChart={showChart} onClick={() => setShowChart(!showChart)} />
-            </main>
+                <ChartToggleButton showChart={showChart} onClick={() => setShowChart(!showChart)}/>
+            </div>
+
         </div>
     );
 }

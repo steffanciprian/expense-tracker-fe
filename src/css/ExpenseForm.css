@@ -26,3 +26,63 @@
 .expense-form button:hover {
     background: #0072ff;
 }
+.date-input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ffffff33;
+    background: #ffffff11;
+    color: #fff;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #ccc;
+    margin-left: 4px;
+}
+
+.custom-date-input {
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    backdrop-filter: blur(6px);
+    transition: border 0.3s ease;
+}
+
+.custom-date-input:focus {
+    outline: none;
+    border-color: #00c6ff;
+    box-shadow: 0 0 6px rgba(0, 198, 255, 0.4);
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+.success-message {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    background-color: #00c6ff;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    opacity: 0.95;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+.expense-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}

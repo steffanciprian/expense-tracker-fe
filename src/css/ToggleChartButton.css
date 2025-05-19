@@ -1,6 +1,4 @@
 .chart-toggle-fab {
-    position: fixed;
-    /*bottom: 100px;*/
     right: 30px;
     width: 56px;
     height: 56px;
@@ -14,6 +12,10 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(12px);
     transition: 0.3s ease;
+}
+
+.chart-toggle-fab:hover {
+    transform: scale(1.1);
 }
 
 .chart-toggle-fab:hover {

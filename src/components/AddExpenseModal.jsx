@@ -21,10 +21,11 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
         try {
             await addExpense({
                 name,
-                amount: parseFloat(type === 'expense' ? -Math.abs(amount) : Math.abs(amount)),
+                amount: parseFloat(amount),
+                description: notes,
                 date,
                 category,
-                description: notes
+                type: type
             });
             onClose();
         } catch (err) {

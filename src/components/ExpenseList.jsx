@@ -1,6 +1,6 @@
 import '../css/ExpsenseList.css';
-import {useEffect, useState} from "react";
-import {getExpenses} from "../services/expenseService";
+import { useEffect, useState } from "react";
+import { getExpenses } from "../services/expenseService";
 
 const ExpenseList = () => {
     const [expenses, setExpenses] = useState([]);
@@ -38,16 +38,20 @@ const ExpenseList = () => {
                     <ul>
                         {expenses.map((e) => (
                             <li key={e.id} className="fade-in">
-                                <div className="expense-main">
-                                    <span>{e.name}</span>
-                                    <span className={e.amount < 0 ? 'negative' : 'positive'}>
-          {e.amount < 0 ? '-' : '+'}${Math.abs(e.amount)}
-        </span>
+                                <div className="expense-row-top">
+                                    <span className="name">{e.name}</span>
+                                    <span className={`amount ${e.amount < 0 ? 'negative' : 'positive'}`}>
+                                        {e.amount < 0 ? '-' : '+'}${Math.abs(e.amount)}
+                                    </span>
                                     <span className="date">{e.date}</span>
                                 </div>
 
-                                <div className="expense-details">
-                                    <span className="category">{e.category}</span>
+                                <div className="expense-row-details">
+                                    {e.category && (
+                                        <span className={`category category-${e.category.toLowerCase()}`}>
+                                            {e.category}
+                                        </span>
+                                    )}
                                     {e.description && (
                                         <span className="description">"{e.description}"</span>
                                     )}
@@ -60,7 +64,6 @@ const ExpenseList = () => {
                             </li>
                         ))}
                     </ul>
-
                 )
             }
         </section>

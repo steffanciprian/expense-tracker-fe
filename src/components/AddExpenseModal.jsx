@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/AddExpenseModal.css';
 import { addExpense } from '../services/expenseService';
+import {useExpenses} from "./ExpenseContext";
 
 const AddExpenseModal = ({ isOpen, onClose }) => {
     const [name, setName] = useState('');
@@ -9,6 +10,7 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
     const [category, setCategory] = useState('');
     const [notes, setNotes] = useState('');
     const [type, setType] = useState('expense'); // NEW toggle state
+    const { setExpenses } = useExpenses(); // ✅ hook into context
 
     const categories = [
         "FOOD", "TRANSPORT", "UTILITIES", "ENTERTAINMENT", "TRAVEL",
@@ -19,19 +21,22 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addExpense({
+            const newExpense = await addExpense({
                 name,
                 amount: parseFloat(amount),
                 description: notes,
                 date,
                 category,
-                type: type
+                type
             });
+
+            setExpenses(prev => [...prev, newExpense]); // ✅ update UI instantly
             onClose();
         } catch (err) {
             console.error(err);
         }
     };
+
 
     if (!isOpen) return null;
 

@@ -1,18 +1,11 @@
 import '../css/ExpsenseList.css';
-import {useEffect, useState} from "react";
-import {getExpenses} from "../services/expenseService";
+import {useState} from "react";
+import {useExpenses} from "./ExpenseContext";
 
 const ExpenseList = () => {
-    const [expenses, setExpenses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const {expenses} = useExpenses();
     const itemsPerPage = 4;
-
-    useEffect(() => {
-        getExpenses()
-            .then(setExpenses)
-            .catch(console.error);
-    }, []);
-
     const totalPages = Math.ceil(expenses.length / itemsPerPage);
 
     const paginatedExpenses = expenses.slice(

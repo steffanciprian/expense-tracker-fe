@@ -1,14 +1,70 @@
+/* ---------------------------
+   Base List Item Styling
+---------------------------- */
 .expense-list li {
     display: flex;
     flex-direction: column;
     gap: 12px;
     padding: 16px;
     margin-bottom: 14px;
-    background-color: rgba(255, 255, 255, 0.04);
     border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03); /* subtle glass effect */
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     animation: fade-in 0.4s ease forwards;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); /* elevation */
 }
 
+/* Hover effect */
+.expense-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------------------------
+   Income / Expense Variants
+---------------------------- */
+.expense-list li.income {
+    border-left: 6px solid #2ecc71;
+    box-shadow: inset 4px 0 0 #2ecc71, 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.expense-list li.expense {
+    border-left: 6px solid #e74c3c;
+    box-shadow: inset 4px 0 0 #e74c3c, 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------------------------
+   Text Coloring
+---------------------------- */
+.amount {
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+.amount.positive {
+    color: #2ecc71;
+}
+
+.amount.negative {
+    color: #e74c3c;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 1rem;
+    flex: 1;
+}
+
+.date {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+/* ---------------------------
+   Detail Row
+---------------------------- */
 .expense-row-top {
     display: flex;
     justify-content: space-between;
@@ -26,22 +82,9 @@
     font-style: italic;
 }
 
-.name {
-    font-weight: 600;
-    font-size: 1rem;
-    flex: 1;
-}
-
-.amount {
-    font-weight: bold;
-    font-variant-numeric: tabular-nums;
-}
-
-.date {
-    font-size: 0.85rem;
-    color: #aaa;
-}
-
+/* ---------------------------
+   Labels and Tags
+---------------------------- */
 .category {
     padding: 3px 8px;
     border-radius: 6px;
@@ -58,13 +101,18 @@
     word-break: break-word;
 }
 
+/* ---------------------------
+   Action Buttons
+---------------------------- */
 .actions {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
 }
 
-/* Optional: space for mobile wrapping */
+/* ---------------------------
+   Mobile Adjustments
+---------------------------- */
 @media (max-width: 480px) {
     .expense-row-top {
         flex-direction: column;
@@ -74,4 +122,46 @@
     .actions {
         justify-content: flex-start;
     }
+}
+
+/* ---------------------------
+   Default Category Backgrounds
+---------------------------- */
+[class^="category-bg-"] {
+    background: linear-gradient(145deg, #1e1e2e, #2a2a40);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fade-in 0.4s ease forwards;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 12px;
+    color: white;
+}
+
+.pagination button {
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }

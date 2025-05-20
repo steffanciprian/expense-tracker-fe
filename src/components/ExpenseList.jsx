@@ -30,6 +30,13 @@ const ExpenseList = () => {
 
     return (
         <section className="expense-list">
+            {/* PDF Download Button */}
+            <div className="pdf-download">
+                <button onClick={() => alert("PDF export coming soon!")}>
+                    📄 Download PDF
+                </button>
+            </div>
+
             {expenses.length === 0 ? (
                 <div className="empty-state">
                     <svg width="160" height="160" viewBox="0 0 24 24" fill="none">
@@ -39,6 +46,7 @@ const ExpenseList = () => {
                     <p>No expenses recorded yet.</p>
                     <span>Start by clicking <strong>“+ Add Expense”</strong> to track your spending.</span>
                 </div>
+
             ) : (
                 <>
                     <ul>

@@ -10,11 +10,13 @@ import MenuDrawer from "./components/MenuDrawer";
 import ChartView from "./components/ChartView";
 import ChartToggleButton from "./components/ChartToggleButton";
 import AddExpenseModal from './components/AddExpenseModal';
+import {ExpenseProvider} from "./components/ExpenseContext";
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
+        <ExpenseProvider>
         <Router>
             <div className="app-container">
                 <MenuDrawer/>
@@ -43,6 +45,7 @@ function App() {
 
             </div>
         </Router>
+        </ExpenseProvider>
     );
 }
 

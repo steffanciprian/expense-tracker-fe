@@ -1,8 +1,9 @@
 import '../css/Header.css';
+
 const Header = () => {
     return (
         <header className="app-header">
-            <h1>💸 Expense Tracker</h1>
+            <h1 className="header-title">💸 Expense Tracker</h1>
         </header>
     );
 };

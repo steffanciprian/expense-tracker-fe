@@ -1,36 +1,48 @@
 import React, {useState} from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import './css/App.css';
 import Header from "./components/Header";
 import BalanceSummary from "./components/BalanceSummary";
-import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import CategorySummary from "./components/CategorySummary";
 import MenuDrawer from "./components/MenuDrawer";
-import FabButton from "./components/FabButton";
 import ChartView from "./components/ChartView";
 import ChartToggleButton from "./components/ChartToggleButton";
+import AddExpenseModal from './components/AddExpenseModal';
 
 function App() {
-    const [showChart, setShowChart] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="app-container">
-            <MenuDrawer/>
-            <Header/>
-            <main className="main-content">
-                <BalanceSummary/>
-                <ExpenseForm/>
-                <ExpenseList/>
-                <CategorySummary/>
-            </main>
-            <div className="fab-container">
-                <FabButton onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}/>
-                {showChart && <ChartView/>}
-                <ChartToggleButton showChart={showChart} onClick={() => setShowChart(!showChart)}/>
-            </div>
+        <Router>
+            <div className="app-container">
+                <MenuDrawer/>
+                <Header/>
+                <main className="main-content">
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <>
+                                    <BalanceSummary onAddExpense={() => setIsModalOpen(true)}/>
+                                    <ExpenseList/>
+                                    <CategorySummary/>
+                                </>
+                            }
+                        />
 
-        </div>
+                        <Route path="/chart" element={<ChartView/>}/>
+                    </Routes>
+                </main>
+
+                <div className="fab-container">
+                    <ChartToggleButton/>
+                </div>
+                <AddExpenseModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
+
+            </div>
+        </Router>
     );
 }
 

@@ -16,7 +16,7 @@ const ExpenseForm = () => {
         try {
             await addExpense({
                 name,
-                cost: parseFloat(amount),
+                amount: parseFloat(amount),
                 description: '',
                 date
             })

@@ -1,9 +1,13 @@
+/* 🧾 Expense Form Container */
 .expense-form {
     display: flex;
+    flex-wrap: wrap; /* ✅ allow wrapping to prevent overlap */
     gap: 10px;
     margin-bottom: 20px;
+    position: relative;
 }
 
+/* 🔲 Input Fields */
 .expense-form input {
     flex: 1;
     padding: 10px;
@@ -11,28 +15,59 @@
     border: 1px solid #ffffff33;
     border-radius: 6px;
     color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
+.date-input,
+.custom-date-input {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    min-width: 140px; /* ✅ force enough width to show full date */
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    backdrop-filter: blur(6px);
+    transition: border 0.3s ease;
+    box-sizing: border-box;
+    flex: 0 0 140px;
+}
+
+
+.custom-date-input:focus {
+    outline: none;
+    border-color: #00c6ff;
+    box-shadow: 0 0 6px rgba(0, 198, 255, 0.4);
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* ✅ Submit Button */
 .expense-form button {
-    background: #00c6ff;
-    border: none;
-    padding: 10px 16px;
+    background-color: #2ecc71;
     color: white;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(46, 204, 113, 0.2);
+    height: 38px;
+    white-space: nowrap;
 }
 
 .expense-form button:hover {
-    background: #0072ff;
+    background-color: #27ae60;
+    transform: scale(1.03);
 }
-.date-input {
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ffffff33;
-    background: #ffffff11;
-    color: #fff;
-}
+
+/* 🏷️ Label Group */
 .input-group {
     display: flex;
     flex-direction: column;
@@ -46,27 +81,7 @@
     margin-left: 4px;
 }
 
-.custom-date-input {
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    color: #fff;
-    font-size: 14px;
-    backdrop-filter: blur(6px);
-    transition: border 0.3s ease;
-}
-
-.custom-date-input:focus {
-    outline: none;
-    border-color: #00c6ff;
-    box-shadow: 0 0 6px rgba(0, 198, 255, 0.4);
-}
-
-.custom-date-input::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    cursor: pointer;
-}
+/* ✅ Success Message */
 .success-message {
     position: absolute;
     top: -30px;
@@ -79,10 +94,4 @@
     opacity: 0.95;
     transition: opacity 0.3s ease-in-out;
     pointer-events: none;
-}
-.expense-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    position: relative;
 }

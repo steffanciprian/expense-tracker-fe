@@ -1,14 +1,14 @@
+import React from 'react';
 import '../css/BalanceSummary.css';
-const BalanceSummary = () => {
+
+const BalanceSummary = ({ onAddExpense }) => {
     return (
-        <section className="balance-summary">
-            <h2>Hello, Stefan 👋</h2>
-            <p>Balance: <strong>$1,230.00</strong></p>
-            <div className="summary-row">
-                <span className="income">Income: +$2,000</span>
-                <span className="expense">Expenses: -$770</span>
-            </div>
-        </section>
+        <div className="balance-header">
+            <h2>Balance Summary</h2>
+            <button className="add-expense-btn" onClick={onAddExpense}>
+                ➕ Add Expense
+            </button>
+        </div>
     );
 };
 

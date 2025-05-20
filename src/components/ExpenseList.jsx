@@ -30,13 +30,6 @@ const ExpenseList = () => {
 
     return (
         <section className="expense-list">
-            {/* PDF Download Button */}
-            <div className="pdf-download">
-                <button onClick={() => alert("PDF export coming soon!")}>
-                    📄 Download PDF
-                </button>
-            </div>
-
             {expenses.length === 0 ? (
                 <div className="empty-state">
                     <svg width="160" height="160" viewBox="0 0 24 24" fill="none">
@@ -80,7 +73,6 @@ const ExpenseList = () => {
                         ))}
                     </ul>
 
-                    {/* ✅ Pagination Controls */}
                     {totalPages > 1 && (
                         <div className="pagination">
                             <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1}>

@@ -97,3 +97,23 @@
     from { transform: scale(0.95); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    background-color: #1e1e2e; /* dark background */
+    border: 1px solid #888;
+    border-radius: 6px;
+    color: white; /* white text */
+    font-size: 0.95rem;
+    appearance: none; /* removes default arrow in some browsers */
+}
+select:focus {
+    outline: none;
+    border-color: #aaa;
+}
+
+select option {
+    background-color: #1e1e2e;
+    color: white;
+}

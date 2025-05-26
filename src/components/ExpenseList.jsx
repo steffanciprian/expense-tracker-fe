@@ -1,25 +1,32 @@
 import '../css/ExpsenseList.css';
 import {useState} from "react";
 import {useExpenses} from "./ExpenseContext";
+import {deleteExpense, updateExpense} from "../services/expenseService";
+import EditExpenseModal from "./EditExpenseModal";
 
 const ExpenseList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const {expenses} = useExpenses();
     const itemsPerPage = 4;
     const totalPages = Math.ceil(expenses.length / itemsPerPage);
+    const [editingExpense, setEditingExpense] = useState(null);
+    const { setExpenses } = useExpenses();
 
     const paginatedExpenses = expenses.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
 
-    const handleEdit = (id) => {
-        console.log("Edit", id);
+
+    const handleDelete = async (id) => {
+        try {
+            await deleteExpense(id);
+            setExpenses(prev => prev.filter(e => e.id !== id));
+        } catch (err) {
+            console.error("Delete failed", err);
+        }
     };
 
-    const handleDelete = (id) => {
-        console.log("Delete", id);
-    };
 
     return (
         <section className="expense-list">
@@ -46,8 +53,8 @@ const ExpenseList = () => {
                                 <div className="expense-row-top">
                                     <span className="name">{e.name}</span>
                                     <span className={`amount ${e.type === 'expense' ? 'negative' : 'positive'}`}>
-    {e.type === 'expense' ? '-' : '+'}${e.amount}
-</span>
+                                    {e.type === 'expense' ? '-' : '+'}{e.amount} RON
+                                    </span>
 
                                     <span className="date">{e.date}</span>
                                 </div>
@@ -62,7 +69,7 @@ const ExpenseList = () => {
                                     )}
                                 </div>
                                 <div className="actions">
-                                    <button className="edit-btn" onClick={() => handleEdit(e.id)}>🖉</button>
+                                    <button className="edit-btn" onClick={() => setEditingExpense(e)}>🖉</button>
                                     <button className="delete-btn" onClick={() => handleDelete(e.id)}>🗑️</button>
                                 </div>
                             </li>
@@ -84,6 +91,12 @@ const ExpenseList = () => {
                     )}
                 </>
             )}
+            <EditExpenseModal
+                isOpen={!!editingExpense}
+                onClose={() => setEditingExpense(null)}
+                expense={editingExpense}
+            />
+
         </section>
     );
 };

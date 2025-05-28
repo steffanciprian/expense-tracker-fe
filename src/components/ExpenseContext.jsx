@@ -8,6 +8,12 @@ export const ExpenseProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const token = localStorage.getItem("jwtToken");
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+
         getExpenses()
             .then(data => {
                 setExpenses(data);
@@ -15,6 +21,7 @@ export const ExpenseProvider = ({ children }) => {
             })
             .catch(() => setLoading(false));
     }, []);
+
 
     return (
         <ExpenseContext.Provider value={{ expenses, setExpenses, loading }}>

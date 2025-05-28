@@ -1,0 +1,40 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #00c6ff, #0072ff); /* Used across all safe actions */
+    --danger-gradient: linear-gradient(135deg, #ff4e50, #f9d423); /* For logout, delete */
+    --dark-bg: #2a2a3b;
+    --text-color: #ffffff;
+    --header-bg: #1e1e2e;
+}
+
+/* Base reusable button */
+.btn {
+    color: var(--text-color);
+    font-weight: 600;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    opacity: 0.95;
+}
+
+.btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Color variants */
+.btn-primary {
+    background: var(--primary-gradient);
+}
+
+.btn-danger {
+    background: var(--danger-gradient);
+}

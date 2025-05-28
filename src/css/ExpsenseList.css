@@ -1,45 +1,63 @@
-/* ---------------------------
-   Base List Item Styling
----------------------------- */
+/* ==========================================================================
+   EXPENSE LIST - GOD TIER UI
+   ========================================================================= */
+
+/* ---------- Base Layout ---------- */
+.expense-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 .expense-list li {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    margin-bottom: 14px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03); /* subtle glass effect */
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    animation: fade-in 0.4s ease forwards;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); /* elevation */
+    gap: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Hover effect */
 .expense-list li:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
 }
 
-/* ---------------------------
-   Income / Expense Variants
----------------------------- */
-.expense-list li.income {
-    border-left: 6px solid #2ecc71;
-    box-shadow: inset 4px 0 0 #2ecc71, 0 6px 16px rgba(0, 0, 0, 0.3);
+/* ---------- Income vs Expense ---------- */
+li.income {
+    border-left: 5px solid #2ecc71;
 }
 
-.expense-list li.expense {
-    border-left: 6px solid #e74c3c;
-    box-shadow: inset 4px 0 0 #e74c3c, 0 6px 16px rgba(0, 0, 0, 0.3);
+li.expense {
+    border-left: 5px solid #e74c3c;
 }
 
-/* ---------------------------
-   Text Coloring
----------------------------- */
+/* ---------- Top Row (Name, Amount, Date) ---------- */
+.expense-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #ffffff;
+    flex-grow: 1;
+}
+
 .amount {
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1rem;
     font-variant-numeric: tabular-nums;
 }
 
@@ -51,108 +69,104 @@
     color: #e74c3c;
 }
 
-.name {
-    font-weight: 600;
-    font-size: 1rem;
-    flex: 1;
-}
-
 .date {
-    font-size: 0.85rem;
-    color: #aaa;
-}
-
-/* ---------------------------
-   Detail Row
----------------------------- */
-.expense-row-top {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-}
-
-.expense-row-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: #ccc;
+    font-size: 0.8rem;
+    color: #aaaaaa;
     font-style: italic;
 }
 
-/* ---------------------------
-   Labels and Tags
----------------------------- */
+/* ---------- Detail Row (Category, Description) ---------- */
+.expense-row-details {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: #cccccc;
+}
+
 .category {
-    padding: 3px 8px;
+    background-color: #444;
+    padding: 4px 10px;
     border-radius: 6px;
-    font-size: 0.75rem;
-    background-color: #333;
     text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
     color: white;
 }
 
 .description {
-    font-size: 0.85rem;
-    color: #aaa;
     font-style: italic;
+    opacity: 0.8;
     word-break: break-word;
 }
 
-/* ---------------------------
-   Action Buttons
----------------------------- */
+/* ---------- Action Buttons ---------- */
 .actions {
     display: flex;
+    gap: 10px;
     justify-content: flex-end;
-    gap: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
 }
 
-/* ---------------------------
-   Mobile Adjustments
----------------------------- */
-@media (max-width: 480px) {
-    .expense-row-top {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .actions {
-        justify-content: flex-start;
-    }
+li:hover .actions {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* ---------------------------
-   Default Category Backgrounds
----------------------------- */
-[class^="category-bg-"] {
-    background: linear-gradient(145deg, #1e1e2e, #2a2a40);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 14px;
+.actions button {
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #dddddd;
+    transition: color 0.2s ease;
+}
+
+.actions button:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* ---------- Empty State ---------- */
+.empty-state {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
-    animation: fade-in 0.4s ease forwards;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: #aaa;
+    padding: 40px 20px;
+    text-align: center;
 }
+
+.empty-state svg {
+    opacity: 0.4;
+}
+
+.empty-state strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ---------- Pagination ---------- */
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    gap: 12px;
+    gap: 14px;
+    padding: 20px;
     color: white;
+    font-weight: 500;
 }
 
 .pagination button {
-    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    color: #ffffff;
     cursor: pointer;
     transition: background 0.2s ease;
 }
@@ -165,48 +179,36 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
-.pdf-download {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+
+/* ---------- Animations ---------- */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.pdf-download button {
-    padding: 10px 20px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #3b3b5d, #505073);
-    color: white;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: background 0.2s ease;
+.fade-in {
+    animation: fade-in 0.3s ease;
 }
 
-.pdf-download button:hover {
-    background: linear-gradient(135deg, #4a4a6d, #626283);
-}
-.type-toggle {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    justify-content: center;
-}
+/* ---------- Mobile Adjustments ---------- */
+@media (max-width: 600px) {
+    .expense-row-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.type-toggle button {
-    padding: 6px 14px;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    background: #2a2a40;
-    color: white;
-    opacity: 0.7;
-    transition: all 0.2s ease;
-}
+    .actions {
+        justify-content: flex-start;
+    }
 
-.type-toggle button.active {
-    background: #4caf50;
-    opacity: 1;
+    .pagination {
+        flex-direction: column;
+        gap: 8px;
+    }
 }

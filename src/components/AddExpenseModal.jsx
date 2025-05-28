@@ -9,8 +9,8 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
     const [category, setCategory] = useState('');
     const [notes, setNotes] = useState('');
-    const [type, setType] = useState('expense'); // NEW toggle state
-    const { setExpenses } = useExpenses(); // ✅ hook into context
+    const [type, setType] = useState('expense');
+    const { setExpenses } = useExpenses();
 
     const categories = [
         "FOOD", "TRANSPORT", "UTILITIES", "ENTERTAINMENT", "TRAVEL",
@@ -30,7 +30,7 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
                 type
             });
 
-            setExpenses(prev => [...prev, newExpense]); // ✅ update UI instantly
+            setExpenses(prev => [...prev, newExpense]);
             onClose();
         } catch (err) {
             console.error(err);

@@ -16,6 +16,7 @@ import { ExpenseProvider } from "./components/ExpenseContext";
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import { AuthProvider, useAuth } from "./components/AuthContext";
+import SummaryTiles from "./components/SummaryTiles";
 
 const ProtectedRoute = ({ element }) => {
     const { token } = useAuth();
@@ -30,18 +31,19 @@ const ProtectedDashboard = () => {
             <MenuDrawer />
             <Header />
             <main className="main-content">
-                <BalanceSummary onAddExpense={() => setIsModalOpen(true)}/>
+                <BalanceSummary onAddExpense={() => setIsModalOpen(true)} />
                 <h3 className="section-title">Your Expenses</h3>
-                <ExpenseList/>
-                <CategorySummary/>
+                <ExpenseList />
+                <SummaryTiles />
             </main>
             <div className="fab-container">
-                <ChartToggleButton/>
+                <ChartToggleButton />
             </div>
             <AddExpenseModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </>
     );
 };
+
 
 const AppRoutes = () => {
     const { token } = useAuth();

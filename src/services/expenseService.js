@@ -15,17 +15,18 @@ export const addExpense = async (expense) => {
     return res.data;
 };
 
-export const getExpenses = async () => {
+// expenseService.js
+export const getExpenses = async (filter = 'all') => {
     const token = localStorage.getItem("jwtToken");
-
-    const res = await axios.get(BASE_URL, {
+    // const response = await axios.get(`http://localhost:8080/expenses?filter=${filter}`, {
+    const response = await axios.get(`https://expense-tracker-y9kx.onrender.com/expenses?filter=${filter}`, {
         headers: {
-            Authorization: `Bearer ${token}`
-        }
+            Authorization: `Bearer ${token}`,
+        },
     });
-
-    return res.data;
+    return response.data;
 };
+
 
 export const deleteExpense = async (id) => {
     const token = localStorage.getItem("jwtToken");
@@ -50,3 +51,15 @@ export const updateExpense = async (id, updatedExpense) => {
 
     return res.data;
 };
+
+export const getExpensesCustomRange = async (startDate, endDate) => {
+    const token = localStorage.getItem("jwtToken");
+    const response = await axios.get(BASE_URL, {
+        params: { startDate, endDate },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return response.data;
+};
+

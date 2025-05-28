@@ -1,0 +1,69 @@
+.summary-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 24px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* Tile Base */
+.summary-tiles .tile {
+    flex: 1 1 240px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-tiles .tile:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Title */
+.summary-tiles .tile h4 {
+    margin: 0;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #cccccc;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+}
+
+/* Amount */
+.summary-tiles .tile p {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Income / Expense Style */
+.tile.income {
+    border-left: 5px solid #00ffa3;
+    background: linear-gradient(135deg, rgba(0, 255, 163, 0.12), rgba(0, 136, 102, 0.2));
+}
+
+.tile.expense {
+    border-left: 5px solid #ff4e50;
+    background: linear-gradient(135deg, rgba(255, 78, 80, 0.12), rgba(160, 0, 45, 0.2));
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .summary-tiles {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .summary-tiles .tile {
+        padding: 20px;
+    }
+}

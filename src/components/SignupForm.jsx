@@ -16,6 +16,7 @@ const SignupForm = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
+            // await axios.post('http://localhost:8080/auth/register', { username, password });
             await axios.post('https://expense-tracker-y9kx.onrender.com/auth/register', { username, password });
             alert('✅ Account created! You can now log in.');
             navigate('/login');

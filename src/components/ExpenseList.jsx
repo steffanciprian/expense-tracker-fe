@@ -1,22 +1,34 @@
-import '../css/ExpsenseList.css';
-import {useState} from "react";
-import {useExpenses} from "./ExpenseContext";
-import {deleteExpense, updateExpense} from "../services/expenseService";
+import { useEffect, useState } from "react";
+import { getExpenses, deleteExpense } from "../services/expenseService";
+import { useExpenses } from "./ExpenseContext";
 import EditExpenseModal from "./EditExpenseModal";
+import '../css/ExpsenseList.css';
 
 const ExpenseList = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const {expenses} = useExpenses();
+    const { expenses, setExpenses } = useExpenses();
+    const [editingExpense, setEditingExpense] = useState(null);
     const itemsPerPage = 4;
     const totalPages = Math.ceil(expenses.length / itemsPerPage);
-    const [editingExpense, setEditingExpense] = useState(null);
-    const { setExpenses } = useExpenses();
+
+    // ⬇️ Fetch expenses once when component mounts
+    useEffect(() => {
+        const fetchExpenses = async () => {
+            try {
+                const data = await getExpenses();
+                setExpenses(data);
+            } catch (err) {
+                console.error("Failed to fetch expenses:", err);
+            }
+        };
+
+        fetchExpenses();
+    }, [setExpenses]);
 
     const paginatedExpenses = expenses.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
-
 
     const handleDelete = async (id) => {
         try {
@@ -26,7 +38,6 @@ const ExpenseList = () => {
             console.error("Delete failed", err);
         }
     };
-
 
     return (
         <section className="expense-list">
@@ -40,7 +51,6 @@ const ExpenseList = () => {
                     <p>No expenses recorded yet.</p>
                     <span>Start by clicking <strong>“+ Add Expense”</strong> to track your spending.</span>
                 </div>
-
             ) : (
                 <>
                     <ul>
@@ -48,14 +58,12 @@ const ExpenseList = () => {
                             <li
                                 key={e.id}
                                 className={`fade-in category-bg-${e.category?.toLowerCase() || 'other'} ${e.type}`}
-
                             >
                                 <div className="expense-row-top">
                                     <span className="name">{e.name}</span>
                                     <span className={`amount ${e.type === 'expense' ? 'negative' : 'positive'}`}>
-                                    {e.type === 'expense' ? '-' : '+'}{e.amount} RON
+                                        {e.type === 'expense' ? '-' : '+'}{e.amount} RON
                                     </span>
-
                                     <span className="date">{e.date}</span>
                                 </div>
                                 <div className="expense-row-details">
@@ -78,25 +86,23 @@ const ExpenseList = () => {
 
                     {totalPages > 1 && (
                         <div className="pagination">
-                            <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
-                                    disabled={currentPage === 1}>
+                            <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1}>
                                 ← Prev
                             </button>
                             <span>Page {currentPage} of {totalPages}</span>
-                            <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
-                                    disabled={currentPage === totalPages}>
+                            <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
                                 Next →
                             </button>
                         </div>
                     )}
                 </>
             )}
+
             <EditExpenseModal
                 isOpen={!!editingExpense}
                 onClose={() => setEditingExpense(null)}
                 expense={editingExpense}
             />
-
         </section>
     );
 };

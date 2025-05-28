@@ -22,7 +22,7 @@ const CategorySummary = () => {
                 ) : (
                     categories.map((cat) => (
                         <li key={cat}>
-                            <span>{getCategoryIcon(cat)} {cat}:</span> ${totalsByCategory[cat].toFixed(2)}
+                            <span>{getCategoryIcon(cat)} {cat}:</span> RON {totalsByCategory[cat].toFixed(2)}
                         </li>
                     ))
                 )}

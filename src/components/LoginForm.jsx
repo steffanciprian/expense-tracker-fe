@@ -13,8 +13,7 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            // const res = await axios.post('http://localhost:8080/auth/login', {
-            const res = await axios.post('http://13.51.196.71:8080/auth/login', {
+            const res = await axios.post('https://expense-tracker-y9kx.onrender.com/auth/login', {
                 username,
                 password,
             });

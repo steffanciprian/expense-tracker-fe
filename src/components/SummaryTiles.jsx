@@ -1,36 +1,39 @@
-import {useExpenses} from "./ExpenseContext";
-import '../css/SummaryTiles.css';
+import { useExpenses } from "./ExpenseContext";
+import "../css/SummaryTiles.css";
 
 const SummaryTiles = () => {
-    const {expenses} = useExpenses();
+    const { expenses } = useExpenses();
 
-    if (!expenses || !Array.isArray(expenses)) {
-        return null;
-    }
+    if (!Array.isArray(expenses)) return null;
 
     const totalExpenses = expenses
-        .filter(e => e.type === "expense")
+        .filter((e) => e.type === "expense")
         .reduce((sum, e) => sum + e.amount, 0);
 
     const totalIncome = expenses
-        .filter(e => e.type === "income")
+        .filter((e) => e.type === "income")
         .reduce((sum, e) => sum + e.amount, 0);
 
-    return (
+    const balance = totalIncome - totalExpenses;
 
-        <div className="summary-tiles">
-            <div className="tile income">
-                <h4>Total Income</h4>
-                <p>+{totalIncome.toFixed(2)} RON</p>
+    return (
+        <div className="summary-tiles-small">
+            <div className="tile-mini income-tile">
+                <span className="label">Income</span>
+                <span className="amount">+{totalIncome.toFixed(2)} RON</span>
             </div>
-            <div className="tile expense">
-                <h4>Total Expenses</h4>
-                <p>-{totalExpenses.toFixed(2)} RON</p>
+            <div className="tile-mini expense-tile">
+                <span className="label">Expenses</span>
+                <span className="amount">-{totalExpenses.toFixed(2)} RON</span>
+            </div>
+            <div className="tile-mini balance-tile">
+                <span className="label">Balance</span>
+                <span className={`amount ${balance >= 0 ? 'positive' : 'negative'}`}>
+                    {balance >= 0 ? "+" : "-"}{Math.abs(balance).toFixed(2)} RON
+                </span>
             </div>
         </div>
-
-    )
-        ;
+    );
 };
 
 export default SummaryTiles;

@@ -19,7 +19,7 @@ export const addExpense = async (expense) => {
 // expenseService.js
 export const getExpenses = async (filter = 'all') => {
     const token = localStorage.getItem("jwtToken");
-    const response = await axios.get(`http://13.51.196.71:8080/auth/login?filter=${filter}`, {
+    const response = await axios.get(`http://13.51.196.71:8080/expenses?filter=${filter}`, {
     // const response = await axios.get(`http://localhost:8080/expenses?filter=${filter}`, {
     // const response = await axios.get(`https://expense-tracker-y9kx.onrender.com/expenses?filter=${filter}`, {
         headers: {

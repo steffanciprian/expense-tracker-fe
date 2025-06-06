@@ -49,18 +49,18 @@ const LoginForm = () => {
                 </p>
             </form>
 
-            <button
-                type="button"
-                onClick={() => {
-                    const dummyToken = 'test-jwt-token';
-                    login(dummyToken);
-                    localStorage.setItem('jwtToken', dummyToken); // optional: persist it
-                    navigate('/');
-                }}
-                style={{ marginTop: '1rem', backgroundColor: '#ccc', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}
-            >
-                🔓 Bypass Login
-            </button>
+            {/*<button*/}
+            {/*    type="button"*/}
+            {/*    onClick={() => {*/}
+            {/*        const dummyToken = 'test-jwt-token';*/}
+            {/*        login(dummyToken);*/}
+            {/*        localStorage.setItem('jwtToken', dummyToken); // optional: persist it*/}
+            {/*        navigate('/');*/}
+            {/*    }}*/}
+            {/*    style={{ marginTop: '1rem', backgroundColor: '#ccc', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}*/}
+            {/*>*/}
+            {/*    🔓 Bypass Login*/}
+            {/*</button>*/}
 
         </div>
     );

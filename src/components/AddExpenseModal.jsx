@@ -37,19 +37,19 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
         }
     };
 
-    const handleMockAdd = () => {
-        const mockExpense = {
-            id: `mock-${Date.now()}`,
-            name,
-            amount: parseFloat(amount),
-            description: notes,
-            date,
-            category,
-            type
-        };
-        setExpenses(prev => [...prev, mockExpense]);
-        onClose();
-    };
+    // const handleMockAdd = () => {
+    //     const mockExpense = {
+    //         id: `mock-${Date.now()}`,
+    //         name,
+    //         amount: parseFloat(amount),
+    //         description: notes,
+    //         date,
+    //         category,
+    //         type
+    //     };
+    //     setExpenses(prev => [...prev, mockExpense]);
+    //     onClose();
+    // };
 
     if (!isOpen) return null;
 
@@ -117,20 +117,20 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
 
                     <div className="modal-actions">
                         <button type="submit">Add</button>
-                        <button
-                            type="button"
-                            onClick={handleMockAdd}
-                            style={{
-                                backgroundColor: '#ccc',
-                                color: '#333',
-                                padding: '0.4rem 0.8rem',
-                                borderRadius: '6px',
-                                border: 'none',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            ⚡ Mock Add
-                        </button>
+                        {/*<button*/}
+                        {/*    type="button"*/}
+                        {/*    onClick={handleMockAdd}*/}
+                        {/*    style={{*/}
+                        {/*        backgroundColor: '#ccc',*/}
+                        {/*        color: '#333',*/}
+                        {/*        padding: '0.4rem 0.8rem',*/}
+                        {/*        borderRadius: '6px',*/}
+                        {/*        border: 'none',*/}
+                        {/*        cursor: 'pointer'*/}
+                        {/*    }}*/}
+                        {/*>*/}
+                        {/*    ⚡ Mock Add*/}
+                        {/*</button>*/}
                         <button type="button" onClick={onClose}>Cancel</button>
                     </div>
                 </form>

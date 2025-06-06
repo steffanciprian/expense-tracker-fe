@@ -24,6 +24,9 @@
     max-width: 100%;
     padding: 0 60px; /* buffer space to avoid overlap with logout button */
     text-align: center;
+
+    pointer-events: none; /* <-- Allow clicks to pass through */
+    z-index: 1; /* lower layer */
 }
 
 /* Logout button */
@@ -37,6 +40,9 @@
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s ease;
+
+    position: relative; /* Needed to apply z-index */
+    z-index: 10; /* On top of title */
 }
 
 .app-header button:hover {

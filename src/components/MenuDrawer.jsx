@@ -18,7 +18,7 @@ const MenuDrawer = () => {
     useEffect(() => {
         if (!open) return;
 
-        const focusable = drawerRef.current?.querySelectorAll('button');
+        const focusable = drawerRef.current?.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
         const first = focusable?.[0];
         const last = focusable?.[focusable.length - 1];
 
@@ -36,6 +36,11 @@ const MenuDrawer = () => {
         document.addEventListener('keydown', trapFocus);
         return () => document.removeEventListener('keydown', trapFocus);
     }, [open]);
+
+    const handleLogout = () => {
+        localStorage.removeItem("jwtToken");
+        window.location.href = '/login';
+    };
 
     return (
         <>
@@ -65,6 +70,7 @@ const MenuDrawer = () => {
                         <button onClick={() => alert("BNR exchange rates coming soon!")}>BNR Rates</button>
                         <button onClick={() => alert("Spending insights")}>Spending Insights</button>
                         <button onClick={() => alert("Settings")}>Settings</button>
+                        <button onClick={handleLogout}>Logout</button>
                         <button onClick={() => setOpen(false)}>Close</button>
                     </nav>
                 </>

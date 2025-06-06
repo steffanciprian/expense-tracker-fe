@@ -5,7 +5,7 @@ const MenuDrawer = () => {
     const [open, setOpen] = useState(false);
     const drawerRef = useRef();
 
-    // Close on ESC key
+    // Close on ESC
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') setOpen(false);
@@ -49,7 +49,6 @@ const MenuDrawer = () => {
                 <span></span>
             </button>
 
-
             {open && (
                 <>
                     <div
@@ -57,7 +56,6 @@ const MenuDrawer = () => {
                         role="presentation"
                         onClick={() => setOpen(false)}
                     />
-
                     <nav
                         className="menu-drawer slide-in"
                         role="dialog"

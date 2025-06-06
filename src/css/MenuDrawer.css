@@ -43,12 +43,14 @@
 .menu-drawer button:hover {
     background: rgba(255, 255, 255, 0.08);
 }
+
+/* Hamburger icon container */
 .hamburger-icon {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 30px;
-    height: 24px;
+    width: 34px;
+    height: 26px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -59,16 +61,22 @@
     padding: 0;
 }
 
+/* Default bars (black on white background) */
 .hamburger-icon span {
     display: block;
-    height: 3px;
+    height: 3.5px;
     width: 100%;
-    background: white;
-    border-radius: 4px;
+    background: #111;
+    border-radius: 3px;
     transition: all 0.3s ease;
 }
 
-/* Animation to X when open */
+/* When menu is open, bars turn white */
+.hamburger-icon.open span {
+    background: white;
+}
+
+/* Animate into an X when open */
 .hamburger-icon.open span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }

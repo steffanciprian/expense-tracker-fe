@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../css/AuthForm.css';
 import { useAuth } from './AuthContext';
 
 const LoginForm = () => {
@@ -14,8 +13,8 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             const res = await axios.post('https://expense-tracker-y9kx.onrender.com/auth/login', {
-                username,
-                password,
+                username:username.trim(),
+                password:password.trim(),
             });
             const jwt = res.data;
             login(jwt);
@@ -27,33 +26,42 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="auth-container-glass">
-            <form onSubmit={handleLogin} autoComplete="off" className="auth-box-glass">
-                <h2>Welcome Back</h2>
-                <p className="subtitle">Login to track your expenses</p>
+        <div className="auth-container">
+            <form onSubmit={handleLogin} className="auth-form">
+                <h2>Login</h2>
                 <input
-                    type="text"
-                    name="username"
-                    placeholder="Username or Email"
+                    type="email"
+                    placeholder="Email"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    autoComplete="off"
                     required
                 />
                 <input
                     type="password"
-                    name="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="new-password"
                     required
                 />
-                <button type="submit" className="login-btn">Login</button>
+                <button type="submit">Login</button>
                 <p className="auth-footer">
                     Don’t have an account? <a href="/signup">Sign up</a>
                 </p>
             </form>
+
+            <button
+                type="button"
+                onClick={() => {
+                    const dummyToken = 'test-jwt-token';
+                    login(dummyToken);
+                    localStorage.setItem('jwtToken', dummyToken); // optional: persist it
+                    navigate('/');
+                }}
+                style={{ marginTop: '1rem', backgroundColor: '#ccc', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}
+            >
+                🔓 Bypass Login
+            </button>
+
         </div>
     );
 };

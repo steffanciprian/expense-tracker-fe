@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/AddExpenseModal.css';
 import { addExpense } from '../services/expenseService';
-import {useExpenses} from "./ExpenseContext";
+import { useExpenses } from "./ExpenseContext";
 
 const AddExpenseModal = ({ isOpen, onClose }) => {
     const [name, setName] = useState('');
@@ -37,13 +37,26 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
         }
     };
 
+    const handleMockAdd = () => {
+        const mockExpense = {
+            id: `mock-${Date.now()}`,
+            name,
+            amount: parseFloat(amount),
+            description: notes,
+            date,
+            category,
+            type
+        };
+        setExpenses(prev => [...prev, mockExpense]);
+        onClose();
+    };
 
     if (!isOpen) return null;
 
     return (
         <div className="modal-backdrop">
             <div className="modal-content">
-                <h2 style={{color: type === 'expense' ? '#e74c3c' : '#2ecc71'}}>
+                <h2 style={{ color: type === 'expense' ? '#e74c3c' : '#2ecc71' }}>
                     Add {type === 'expense' ? 'Expense' : 'Income'}
                 </h2>
 
@@ -65,22 +78,59 @@ const AddExpenseModal = ({ isOpen, onClose }) => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="modal-form">
-                    <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)}
-                           required/>
-                    <input type="number" placeholder="Amount" value={amount} onChange={e => setAmount(e.target.value)}
-                           required/>
-                    <input type="date" value={date} onChange={e => setDate(e.target.value)}/>
+                    <input
+                        type="text"
+                        placeholder="Name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="number"
+                        placeholder="Amount"
+                        value={amount}
+                        onChange={e => setAmount(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="date"
+                        value={date}
+                        onChange={e => setDate(e.target.value)}
+                    />
 
-                    <select value={category} onChange={e => setCategory(e.target.value)} required>
+                    <select
+                        value={category}
+                        onChange={e => setCategory(e.target.value)}
+                        required
+                    >
                         <option value="" disabled>Select category</option>
                         {categories.map(cat => (
                             <option key={cat} value={cat}>{cat}</option>
                         ))}
                     </select>
 
-                    <textarea placeholder="Notes" value={notes} onChange={e => setNotes(e.target.value)}/>
+                    <textarea
+                        placeholder="Notes"
+                        value={notes}
+                        onChange={e => setNotes(e.target.value)}
+                    />
+
                     <div className="modal-actions">
                         <button type="submit">Add</button>
+                        <button
+                            type="button"
+                            onClick={handleMockAdd}
+                            style={{
+                                backgroundColor: '#ccc',
+                                color: '#333',
+                                padding: '0.4rem 0.8rem',
+                                borderRadius: '6px',
+                                border: 'none',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            ⚡ Mock Add
+                        </button>
                         <button type="button" onClick={onClose}>Cancel</button>
                     </div>
                 </form>

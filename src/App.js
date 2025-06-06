@@ -22,7 +22,6 @@ const ProtectedRoute = ({ element }) => {
     const { token } = useAuth();
     return token ? element : <Navigate to="/login" replace />;
 };
-
 const ProtectedDashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -36,9 +35,11 @@ const ProtectedDashboard = () => {
                 <ExpenseList />
                 <SummaryTiles />
             </main>
+            {/*
             <div className="fab-container">
                 <ChartToggleButton />
             </div>
+            */}
             <AddExpenseModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </>
     );

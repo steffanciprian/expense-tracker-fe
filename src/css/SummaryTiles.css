@@ -1,78 +1,192 @@
 .summary-tiles-small {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
     padding: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
+    margin-top: 1.2rem;
 }
 
-/* Base style for small tiles */
+/* Tile box */
 .tile-mini {
-    flex: 1 1 160px;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 0.8rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(8px);
+    flex: 1 1 120px;
+    max-width: 160px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ccc;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.tile-mini:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-}
-
-/* Label text */
+/* Label above amount */
 .tile-mini .label {
-    display: block;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    color: #666;
+    margin-bottom: 0.2rem;
     text-transform: uppercase;
-    color: #aaa;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Main value */
+/* Amount below label */
 .tile-mini .amount {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: #f0f0f0;
-    font-variant-numeric: tabular-nums;
+    color: #222;
+    word-break: break-word;
+    line-height: 1.2;
 }
 
-/* Positive/negative balance */
-.amount.positive {
-    color: #00e676;
+.amount.positive,
+.income-tile .amount {
+    color: #2ecc71;
 }
-.amount.negative {
-    color: #ff5252;
+.amount.negative,
+.expense-tile .amount {
+    color: #e74c3c;
 }
 
-/* Individual tile themes */
 .income-tile {
-    border-left: 4px solid #00e6a0;
-    background: linear-gradient(135deg, rgba(0, 230, 160, 0.06), rgba(0, 130, 100, 0.1));
+    border-left: 4px solid #2ecc71;
 }
 .expense-tile {
-    border-left: 4px solid #ff4e50;
-    background: linear-gradient(135deg, rgba(255, 78, 80, 0.06), rgba(130, 0, 30, 0.1));
+    border-left: 4px solid #e74c3c;
 }
 .balance-tile {
-    border-left: 4px solid #4f9aff;
-    background: linear-gradient(135deg, rgba(79, 154, 255, 0.06), rgba(20, 80, 150, 0.1));
+    border-left: 4px solid #3498db;
 }
 
-/* Responsive layout */
+/* Stack vertically & reduce height on small screens */
 @media (max-width: 600px) {
     .summary-tiles-small {
         flex-direction: column;
         align-items: center;
+        gap: 0.75rem;
     }
+
     .tile-mini {
         width: 100%;
-        max-width: 300px;
+        max-width: 280px;
+        padding: 0.4rem 0.6rem; /* 🔽 smaller vertical padding */
     }
+
+    .tile-mini .label {
+        font-size: 0.68rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .tile-mini .amount {
+        font-size: 0.9rem;
+    }
+}
+.summary-toggle-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.summary-toggle-btn:hover {
+    background-color: #43a047;
+    transform: scale(1.05);
+}
+
+.summary-toggle-btn:active {
+    background-color: #388e3c;
+    transform: scale(0.98);
+}
+.summary-toggle-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.summary-toggle-btn:hover {
+    background-color: #43a047;
+    transform: scale(1.05);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    max-width: 500px;
+    width: 90%;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.summary-tiles-small {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.tile-mini {
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.income-tile {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.expense-tile {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.balance-tile {
+    background-color: #e3f2fd;
+    color: #1976d2;
 }

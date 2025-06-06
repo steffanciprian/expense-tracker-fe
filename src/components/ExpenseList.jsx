@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getExpenses, getExpensesCustomRange, deleteExpense } from "../services/expenseService";
 import { useExpenses } from "./ExpenseContext";
 import EditExpenseModal from "./EditExpenseModal";
-import '../css/ExpsenseList.css';
+import '../css/ExpenseList.css';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -49,8 +49,8 @@ const ExpenseList = () => {
     const paginatedExpenses = expenses.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
     return (
-        <div className="expense-dashboard">
-            <div className="filter-bar">
+        <div className="expense-container">
+            <div className="filters">
                 <select value={timeFilter} onChange={(e) => setTimeFilter(e.target.value)}>
                     <option value="all">All</option>
                     <option value="day">Today</option>
@@ -66,37 +66,29 @@ const ExpenseList = () => {
                 )}
             </div>
 
-            {loading && <div className="status">🔄 Loading expenses...</div>}
-            {error && <div className="status error">❌ {error}</div>}
+            {loading && <div className="status">Loading...</div>}
+            {error && <div className="status error">{error}</div>}
 
             {!loading && expenses.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-icon">📭</div>
-                    <p>No expenses yet</p>
-                    <span>Click <strong>+ Add Expense</strong> to start tracking</span>
-                </div>
+                <div className="empty">No expenses found.</div>
             )}
 
             {!loading && expenses.length > 0 && (
-                <div className="expense-list-grid">
+                <div className="expense-list">
                     {paginatedExpenses.map(e => (
-                        <div key={e.id} className={`expense-card ${e.type}`}>
-                            <div className="card-top">
-                                <div className="left">
-                                    <h4>{e.name}</h4>
-                                    <span className="category-tag">{e.category}</span>
-                                </div>
-                                <div className={`amount ${e.type}`}>
-                                    {e.type === 'expense' ? '-' : '+'}{e.amount} RON
-                                </div>
+                        <div key={e.id} className="expense-card">
+                            <div className="expense-header">
+                                <strong>{e.name}</strong>
+                                <span className={`amount ${e.type}`}>{e.type === 'expense' ? '-' : '+'}{e.amount} RON</span>
                             </div>
-                            <div className="card-bottom">
-                                <div className="date">{e.date}</div>
-                                <div className="desc">{e.description}</div>
-                                <div className="actions">
-                                    <button onClick={() => setEditingExpense(e)}>✏️</button>
-                                    <button onClick={() => handleDelete(e.id)}>🗑️</button>
-                                </div>
+                            <div className="expense-meta">
+                                <span>{e.category}</span>
+                                <span>{e.date}</span>
+                            </div>
+                            <p className="description">{e.description}</p>
+                            <div className="expense-actions">
+                                <button onClick={() => setEditingExpense(e)}>✏️</button>
+                                <button onClick={() => handleDelete(e.id)}>🗑️</button>
                             </div>
                         </div>
                     ))}
@@ -104,10 +96,10 @@ const ExpenseList = () => {
             )}
 
             {expenses.length > ITEMS_PER_PAGE && (
-                <div className="pagination-bar">
-                    <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1}>←</button>
+                <div className="pagination">
+                    <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1}>Prev</button>
                     <span>Page {currentPage} of {totalPages}</span>
-                    <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>→</button>
+                    <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
                 </div>
             )}
 

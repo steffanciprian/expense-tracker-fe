@@ -29,7 +29,9 @@ const LoginForm = () => {
     return (
         <div className="auth-container">
             <form onSubmit={handleLogin} className="auth-form">
-                <h2>Login</h2>
+                <h2>Welcome Back 👋</h2>
+                <p className="auth-message">Log in to track your expenses and take control of your finances.</p>
+
                 <input
                     type="email"
                     placeholder="Email"
@@ -49,22 +51,9 @@ const LoginForm = () => {
                     Don’t have an account? <a href="/signup">Sign up</a>
                 </p>
             </form>
-
-            {/*<button*/}
-            {/*    type="button"*/}
-            {/*    onClick={() => {*/}
-            {/*        const dummyToken = 'test-jwt-token';*/}
-            {/*        login(dummyToken);*/}
-            {/*        localStorage.setItem('jwtToken', dummyToken); // optional: persist it*/}
-            {/*        navigate('/');*/}
-            {/*    }}*/}
-            {/*    style={{ marginTop: '1rem', backgroundColor: '#ccc', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}*/}
-            {/*>*/}
-            {/*    🔓 Bypass Login*/}
-            {/*</button>*/}
-
         </div>
     );
+
 };
 
 export default LoginForm;

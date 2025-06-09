@@ -1,192 +1,172 @@
-.summary-tiles-small {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    padding: 1rem;
-    margin-top: 1.2rem;
-}
-
-/* Tile box */
-.tile-mini {
-    flex: 1 1 120px;
-    max-width: 160px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 0.6rem 0.8rem;
-    border: 1px solid #ccc;
-    text-align: center;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Label above amount */
-.tile-mini .label {
-    font-size: 0.72rem;
-    color: #666;
-    margin-bottom: 0.2rem;
-    text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Amount below label */
-.tile-mini .amount {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #222;
-    word-break: break-word;
-    line-height: 1.2;
-}
-
-.amount.positive,
-.income-tile .amount {
-    color: #2ecc71;
-}
-.amount.negative,
-.expense-tile .amount {
-    color: #e74c3c;
-}
-
-.income-tile {
-    border-left: 4px solid #2ecc71;
-}
-.expense-tile {
-    border-left: 4px solid #e74c3c;
-}
-.balance-tile {
-    border-left: 4px solid #3498db;
-}
-
-/* Stack vertically & reduce height on small screens */
-@media (max-width: 600px) {
-    .summary-tiles-small {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.75rem;
-    }
-
-    .tile-mini {
-        width: 100%;
-        max-width: 280px;
-        padding: 0.4rem 0.6rem; /* 🔽 smaller vertical padding */
-    }
-
-    .tile-mini .label {
-        font-size: 0.68rem;
-        margin-bottom: 0.1rem;
-    }
-
-    .tile-mini .amount {
-        font-size: 0.9rem;
-    }
-}
-.summary-toggle-btn {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 1rem;
-}
-
-.summary-toggle-btn:hover {
-    background-color: #43a047;
-    transform: scale(1.05);
-}
-
-.summary-toggle-btn:active {
-    background-color: #388e3c;
-    transform: scale(0.98);
-}
-.summary-toggle-btn {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 1rem;
-}
-
-.summary-toggle-btn:hover {
-    background-color: #43a047;
-    transform: scale(1.05);
-}
-
+/* ===== Modal Styling ===== */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.45);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 999;
 }
 
 .modal-content {
     position: relative;
     background: #fff;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 480px;
     width: 90%;
 }
 
+/* ===== Close Button ===== */
 .close-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    background: transparent;
+    top: 10px;
+    right: 10px;
+    background: none;
     border: none;
     font-size: 1.3rem;
     cursor: pointer;
     color: #666;
 }
-
 .close-btn:hover {
     color: #000;
 }
 
+/* ===== Currency Dropdown ===== */
+.currency-selector {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.currency-selector label {
+    font-weight: 500;
+    color: #333;
+}
+
+.currency-selector select {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 0.95rem;
+    color: #333;
+    transition: border-color 0.2s ease;
+}
+
+.currency-selector select:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+/* ===== Toggle Button ===== */
+.summary-toggle-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.65rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.summary-toggle-btn:hover {
+    background-color: #43a047;
+    transform: scale(1.05);
+}
+.summary-toggle-btn:active {
+    background-color: #388e3c;
+    transform: scale(0.97);
+}
+
+/* ===== Summary Tiles (Full-Width Inside Modal) ===== */
 .summary-tiles-small {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 1rem;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+    width: 100%;
 }
 
 .tile-mini {
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
-    background-color: #f5f5f5;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+.tile-mini:hover {
+    transform: translateY(-2px);
 }
 
+.tile-mini .label {
+    font-size: 0.78rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+}
+
+.tile-mini .amount {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
+}
+
+/* ===== Specific Tile Colors ===== */
 .income-tile {
     background-color: #e8f5e9;
-    color: #388e3c;
+    border-left: 4px solid #66bb6a;
 }
 
 .expense-tile {
     background-color: #ffebee;
-    color: #d32f2f;
+    border-left: 4px solid #ef5350;
 }
 
 .balance-tile {
     background-color: #e3f2fd;
-    color: #1976d2;
+    border-left: 4px solid #42a5f5;
+}
+
+.amount.positive,
+.income-tile .amount {
+    color: #2e7d32;
+}
+.amount.negative,
+.expense-tile .amount {
+    color: #c62828;
+}
+
+/* ===== Responsive Mobile ===== */
+@media (max-width: 600px) {
+    .summary-tiles-small {
+        gap: 0.75rem;
+    }
+
+    .tile-mini {
+        padding: 0.8rem 1rem;
+    }
+
+    .tile-mini .label {
+        font-size: 0.7rem;
+    }
+
+    .tile-mini .amount {
+        font-size: 1rem;
+    }
 }

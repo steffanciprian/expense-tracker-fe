@@ -10,7 +10,7 @@ const ExpenseList = () => {
     const { expenses, setExpenses } = useExpenses();
     const [currentPage, setCurrentPage] = useState(1);
     const [editingExpense, setEditingExpense] = useState(null);
-    const [timeFilter, setTimeFilter] = useState('all');
+    const [timeFilter, setTimeFilter] = useState('month');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [loading, setLoading] = useState(false);

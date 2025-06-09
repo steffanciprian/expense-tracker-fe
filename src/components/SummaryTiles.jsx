@@ -43,7 +43,7 @@ const SummaryTiles = () => {
                 }
 
                 // ✅ Use full URL to ensure backend is reached (adjust if needed)
-                const backendUrl = "hhttps://expense-tracker-y9kx.onrender.com/api/rates/convert";
+                const backendUrl = "https://expense-tracker-y9kx.onrender.com/api/rates/convert";
                 // const backendUrl = "http://localhost:8080/api/rates/convert";
 
                 const [incomeRes, expensesRes, balanceRes] = await Promise.all([

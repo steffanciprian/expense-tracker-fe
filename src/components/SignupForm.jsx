@@ -28,8 +28,8 @@ const SignupForm = () => {
         }
 
         try {
-            await axios.post('http://localhost:8080/auth/register', {
-            // await axios.post('https://expense-tracker-y9kx.onrender.com/auth/register', {
+            // await axios.post('http://localhost:8080/auth/register', {
+            await axios.post('https://expense-tracker-y9kx.onrender.com/auth/register', {
                 username: email, // still sent as 'username' to backend
                 password,
             });

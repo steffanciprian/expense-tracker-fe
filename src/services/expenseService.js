@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/expenses";
-// const BASE_URL = "https://expense-tracker-y9kx.onrender.com/expenses";
+// const BASE_URL = "http://localhost:8080/expenses";
+const BASE_URL = "https://expense-tracker-y9kx.onrender.com/expenses";
 
 export const addExpense = async (expense) => {
     const token = localStorage.getItem("jwtToken");
@@ -18,8 +18,8 @@ export const addExpense = async (expense) => {
 // expenseService.js
 export const getExpenses = async (filter = 'all') => {
     const token = localStorage.getItem("jwtToken");
-    const response = await axios.get(`http://localhost:8080/expenses?filter=${filter}`, {
-    // const response = await axios.get(`https://expense-tracker-y9kx.onrender.com/expenses?filter=${filter}`, {
+    // const response = await axios.get(`http://localhost:8080/expenses?filter=${filter}`, {
+    const response = await axios.get(`https://expense-tracker-y9kx.onrender.com/expenses?filter=${filter}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

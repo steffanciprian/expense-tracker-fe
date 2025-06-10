@@ -1,46 +1,78 @@
+/* ===== Balance Summary Header ===== */
 .balance-header {
-    background: #2a2a3b;
-    padding: 32px;
+    background: #2c2c3c;
+    padding: 2.5rem 2rem;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 1.5rem;
 }
 
 .balance-header h2 {
-    font-size: 1.5rem;
-    color: #f8f8f8;
+    font-size: 1.7rem;
+    color: #f0f0f0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
+/* ===== Action Buttons Group ===== */
 .action-buttons {
     display: flex;
-    gap: 16px;
+    gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 1rem 0;
 }
 
+/* ===== Common Button Style ===== */
 .action-buttons button {
-    padding: 12px 20px;
-    font-size: 0.95rem;
-    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
     border: none;
-    font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* ===== Add Expense Button ===== */
 .add-expense-btn {
     background: linear-gradient(135deg, #00c6ff, #0072ff);
     color: white;
 }
 
-.download-btn {
-    background: linear-gradient(135deg, #7bff9e, #36cfc9);
-    color: black;
+.add-expense-btn:hover {
+    background: linear-gradient(135deg, #009ee0, #005cd1);
+    transform: scale(1.05);
 }
 
-.action-buttons button:hover {
+/* ===== Download Button ===== */
+.download-btn {
+    background: linear-gradient(135deg, #a1ffc6, #5de2d5);
+    color: #1b1b1b;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, #7df0b3, #3ccfc4);
     transform: scale(1.05);
+}
+
+/* ===== Responsive (Mobile) ===== */
+@media (max-width: 600px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .action-buttons button {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.95rem;
+    }
 }

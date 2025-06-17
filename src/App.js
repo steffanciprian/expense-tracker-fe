@@ -35,11 +35,6 @@ const ProtectedDashboard = () => {
                 <ExpenseList />
                 <SummaryTiles />
             </main>
-            {/*
-            <div className="fab-container">
-                <ChartToggleButton />
-            </div>
-            */}
             <AddExpenseModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </>
     );

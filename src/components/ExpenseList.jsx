@@ -15,6 +15,7 @@ const ExpenseList = () => {
     const [endDate, setEndDate] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [hiddenAmounts, setHiddenAmounts] = useState({});
 
     useEffect(() => {
         const fetchExpenses = async () => {
@@ -25,6 +26,13 @@ const ExpenseList = () => {
                     ? await getExpensesCustomRange(startDate, endDate)
                     : await getExpenses(timeFilter);
                 setExpenses(data);
+
+                const hiddenInit = {};
+                data.forEach(e => {
+                    if (e.amount > 10000) hiddenInit[e.id] = true;
+                });
+                setHiddenAmounts(hiddenInit);
+
             } catch (err) {
                 setError('Failed to load expenses');
                 console.error(err);
@@ -43,6 +51,13 @@ const ExpenseList = () => {
         } catch (err) {
             console.error("Delete failed:", err);
         }
+    };
+
+    const toggleVisibility = (id) => {
+        setHiddenAmounts(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
     };
 
     const totalPages = Math.ceil(expenses.length / ITEMS_PER_PAGE);
@@ -75,23 +90,39 @@ const ExpenseList = () => {
 
             {!loading && expenses.length > 0 && (
                 <div className="expense-list">
-                    {paginatedExpenses.map(e => (
-                        <div key={e.id} className="expense-card">
-                            <div className="expense-header">
-                                <strong>{e.name}</strong>
-                                <span className={`amount ${e.type}`}>{e.type === 'expense' ? '-' : '+'}{e.amount} RON</span>
+                    {paginatedExpenses.map(e => {
+                        const isHidden = hiddenAmounts[e.id] ?? false;
+                        const isBigAmount = e.amount > 10000;
+
+                        return (
+                            <div key={e.id} className="expense-card">
+                                <div className="expense-header">
+                                    <strong>{e.name}</strong>
+                                    <span
+                                        className={`amount ${e.type} ${isBigAmount ? 'big' : ''}`}
+                                    >
+                                        {(isBigAmount && isHidden)
+                                            ? '••••'
+                                            : `${e.type === 'expense' ? '-' : '+'}${e.amount} RON`}
+                                    </span>
+                                </div>
+                                <div className="expense-meta">
+                                    <span>{e.category}</span>
+                                    <span>{e.date}</span>
+                                </div>
+                                <p className="description">{e.description}</p>
+                                <div className="expense-actions">
+                                    <button onClick={() => setEditingExpense(e)}>✏️</button>
+                                    <button onClick={() => handleDelete(e.id)}>🗑️</button>
+                                    {isBigAmount && (
+                                        <button onClick={() => toggleVisibility(e.id)}>
+                                            {isHidden ? '👁️' : '🙈'}
+                                        </button>
+                                    )}
+                                </div>
                             </div>
-                            <div className="expense-meta">
-                                <span>{e.category}</span>
-                                <span>{e.date}</span>
-                            </div>
-                            <p className="description">{e.description}</p>
-                            <div className="expense-actions">
-                                <button onClick={() => setEditingExpense(e)}>✏️</button>
-                                <button onClick={() => handleDelete(e.id)}>🗑️</button>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             )}
 

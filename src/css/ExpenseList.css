@@ -1,22 +1,13 @@
-:root {
-    --text-primary: #1c1c1e;
-    --text-secondary: #6e6e73;
-    --bg-card: #fff;
-    --bg-body: #f5f5f7;
-    --border-color: #d1d1d6;
-    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.06);
-    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
-    --radius: 12px;
-    --transition-fast: 0.2s ease;
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
+/* Modern expense list variables are now in index.css */
+
+/* ===== MODERN EXPENSE LIST ===== */
 
 .expense-container {
     max-width: 100%;
-    padding: 2rem clamp(1rem, 4vw, 2rem);
-    font-family: var(--font-sans);
-    background: var(--bg-body);
-    color: var(--text-primary);
+    padding: 0;
+    font-family: inherit;
+    background: transparent;
+    color: var(--gray-800);
     box-sizing: border-box;
 }
 
@@ -26,136 +17,498 @@
     gap: 1rem;
     justify-content: center;
     margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(145deg, 
+        rgba(14, 165, 233, 0.1) 0%, 
+        rgba(255, 255, 255, 0.9) 20%, 
+        rgba(255, 255, 255, 0.7) 100%);
+    border: 2px solid rgba(14, 165, 233, 0.2);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+        0 8px 32px rgba(14, 165, 233, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(14, 165, 233, 0.1);
+    position: relative;
+}
+
+.filters::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
 }
 
 .filters select,
 .filters input[type="date"] {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    background-color: white;
-    transition: border-color var(--transition-fast);
+    border: 2px solid rgba(14, 165, 233, 0.3);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(15px);
+    transition: var(--transition-all);
+    color: var(--gray-800);
+    font-weight: 600;
+    box-shadow: 
+        0 2px 8px rgba(14, 165, 233, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    position: relative;
+}
+
+.filters select {
+    appearance: none;
+    background-image: 
+        linear-gradient(45deg, transparent 50%, var(--primary-600) 50%),
+        linear-gradient(135deg, var(--primary-600) 50%, transparent 50%);
+    background-position: 
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 10px) calc(1em + 2px);
+    background-size: 
+        5px 5px,
+        5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2.5rem;
 }
 
 .filters select:focus,
 .filters input[type="date"]:focus {
-    border-color: #007aff;
+    border-color: var(--primary-500);
+    box-shadow: 
+        0 0 0 3px rgba(14, 165, 233, 0.2),
+        0 4px 12px rgba(14, 165, 233, 0.25),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.05);
     outline: none;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 100%);
+    transform: translateY(-1px);
+}
+
+.filters select:hover,
+.filters input[type="date"]:hover {
+    border-color: var(--primary-400);
+    transform: translateY(-1px);
+    box-shadow: 
+        0 3px 10px rgba(14, 165, 233, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Special styling for date input */
+.filters input[type="date"] {
+    position: relative;
+}
+
+.filters input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%230ea5e9" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/></svg>');
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+    background-color: rgba(14, 165, 233, 0.1);
+    margin-right: 0.5rem;
+    transition: var(--transition-all);
+}
+
+.filters input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background-color: rgba(14, 165, 233, 0.2);
+    transform: scale(1.1);
 }
 
 .status {
     text-align: center;
-    color: var(--text-secondary);
+    color: var(--gray-600);
     font-size: 1rem;
     margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--gradient-card);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .status.error {
-    color: #d70015;
+    color: var(--error-600);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+    border-color: rgba(239, 68, 68, 0.2);
 }
 
 .empty {
     text-align: center;
-    font-size: 1.1rem;
-    color: #999;
-    margin-top: 3rem;
-    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--gray-500);
+    margin: 3rem 0;
+    padding: 3rem 2rem;
+    background: var(--gradient-card);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-glass);
+}
+
+.empty::before {
+    content: '📊';
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
 }
 
 .expense-list {
     display: grid;
-    gap: 1.5rem;
+    gap: 0.75rem;
 }
 
 .expense-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
-    padding: 1.2rem 1.4rem;
-    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-glass);
+    padding: 0.75rem;
+    transition: var(--transition-all);
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+}
+
+.expense-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
 }
 
 .expense-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-2xl);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .expense-header {
     display: flex;
     justify-content: space-between;
-    font-size: 1.1rem;
+    align-items: center;
+    font-size: 0.95rem;
     font-weight: 600;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.375rem;
+    color: var(--gray-800);
+    padding: 0.375rem 0.6rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-sm);
+}
+
+.expense-title {
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.amount {
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .amount.expense {
-    color: #ff3b30;
+    color: var(--error-600);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 .amount.income {
-    color: #34c759;
+    color: var(--success-600);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.05) 100%);
+    border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
 .expense-meta {
     display: flex;
     justify-content: space-between;
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-    margin-bottom: 0.5rem;
+    align-items: center;
+    color: var(--gray-600);
+    font-size: 0.75rem;
+    margin-bottom: 0.375rem;
+    font-weight: 500;
+    padding: 0.3rem 0.6rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.expense-category {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.expense-date {
+    color: var(--gray-500);
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .description {
-    font-size: 1rem;
-    color: #444;
-    margin-bottom: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
     line-height: 1.4;
+    padding: 0.375rem 0.6rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+    width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .expense-actions {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
 }
 
 .expense-actions button {
-    background: none;
-    border: none;
-    font-size: 1.15rem;
-    color: #666;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    color: var(--gray-600);
     cursor: pointer;
-    transition: color var(--transition-fast);
+    transition: var(--transition-all);
+    backdrop-filter: blur(10px);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .expense-actions button:hover {
-    color: #000;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--gray-800);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.expense-actions button.edit:hover {
+    color: var(--primary-600);
+    border-color: var(--primary-300);
+}
+
+.expense-actions button.delete:hover {
+    color: var(--error-600);
+    border-color: var(--error-300);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Enhanced hover effects for card elements */
+.expense-header:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.expense-meta:hover {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.description:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    white-space: normal;
+    max-width: none;
+    width: auto;
+    overflow: visible;
+    z-index: 10;
+    position: relative;
+    box-shadow: var(--shadow-md);
+}
+
+.expense-category:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.expense-date:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--gray-700);
+}
+
+/* Removed expense-actions:hover since there's no background */
+
+/* Clear visual separation */
+.expense-card > * + * {
+    margin-top: 0.375rem;
+}
+
+/* Ensure each element is clearly bounded */
+.expense-title {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.2rem 0.4rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    font-weight: 600;
 }
 
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.2rem;
-    margin-top: 2.5rem;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-glass);
 }
 
 .pagination button {
-    padding: 0.5rem 1.2rem;
-    border: 1px solid var(--border-color);
-    background: white;
-    border-radius: var(--radius);
-    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: var(--transition-all);
+    color: white;
+    backdrop-filter: blur(10px);
+    min-width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.pagination button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.4s;
 }
 
 .pagination button:hover:not(:disabled) {
-    background: #f0f0f0;
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.pagination button:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.pagination button:active:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
 }
 
 .pagination button:disabled {
-    opacity: 0.5;
+    background: linear-gradient(135deg, var(--gray-400) 0%, var(--gray-500) 100%);
+    color: var(--gray-200);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--gray-300);
     cursor: not-allowed;
+    transform: none !important;
+    opacity: 0.6;
+}
+
+.pagination button:disabled::before {
+    display: none;
+}
+
+.pagination .page-info {
+    padding: 0.75rem 1rem;
+    color: var(--gray-700);
+    font-weight: 600;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(14, 165, 233, 0.2);
+    backdrop-filter: blur(10px);
+    min-width: 120px;
+    text-align: center;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(14, 165, 233, 0.1);
+}
+
+/* Specific styling for prev/next buttons */
+.pagination button[aria-label*="Previous"],
+.pagination button:first-child {
+    background: linear-gradient(135deg, var(--secondary-500) 0%, var(--secondary-600) 100%);
+    box-shadow: 0 2px 8px rgba(217, 70, 239, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.pagination button[aria-label*="Previous"]:hover:not(:disabled),
+.pagination button:first-child:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--secondary-600) 0%, var(--secondary-700) 100%);
+    box-shadow: 0 4px 12px rgba(217, 70, 239, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.pagination button[aria-label*="Next"],
+.pagination button:last-child {
+    background: linear-gradient(135deg, var(--success-500) 0%, var(--success-600) 100%);
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.pagination button[aria-label*="Next"]:hover:not(:disabled),
+.pagination button:last-child:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--success-600) 0%, var(--success-700) 100%);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 @media (max-width: 600px) {

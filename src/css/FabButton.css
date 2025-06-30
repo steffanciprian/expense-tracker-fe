@@ -1,49 +1,147 @@
+/* ===== MODERN FAB BUTTON ===== */
+
 .fab-button {
-    bottom: 30px;
-    right: 30px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(to right, #00c6ff, #0072ff);
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
     color: white;
-    font-size: 32px;
+    font-size: 1.5rem;
     border: none;
     cursor: pointer;
-    z-index: 100;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    transition: 0.3s ease;
+    z-index: 1000;
+    box-shadow: var(--shadow-2xl);
+    transition: var(--transition-all);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    animation: bounceIn 0.8s ease-out 0.5s both;
+}
+
+.fab-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
 }
 
 .fab-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 12px 40px rgba(14, 165, 233, 0.4);
 }
 
+.fab-button:hover::before {
+    left: 100%;
+}
+
+.fab-button:active {
+    transform: scale(1.05);
+}
+
+.fab-button:focus-visible {
+    outline: 3px solid rgba(14, 165, 233, 0.5);
+    outline-offset: 2px;
+}
+
+/* Tooltip styling */
 .tooltip {
     position: relative;
 }
 
 .tooltip-text {
     visibility: hidden;
-    width: max-content;
-    max-width: 160px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 6px 10px;
-    border-radius: 8px;
     position: absolute;
-    z-index: 999;
-    bottom: 70px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 80px;
+    right: 0;
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: var(--gray-800);
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+    z-index: 1001;
     opacity: 0;
-    font-size: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
     white-space: nowrap;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: var(--transition-all);
+    transform: translateY(10px);
+}
+
+.tooltip-text::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    border: 6px solid transparent;
+    border-top-color: rgba(255, 255, 255, 0.9);
 }
 
 .tooltip:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pulse animation for attention */
+.fab-button.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: var(--shadow-2xl);
+    }
+    50% {
+        box-shadow: 0 8px 30px rgba(14, 165, 233, 0.6);
+    }
+    100% {
+        box-shadow: var(--shadow-2xl);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .fab-button {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 56px;
+        height: 56px;
+        font-size: 1.25rem;
+    }
+    
+    .tooltip-text {
+        bottom: 70px;
+        right: -10px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .fab-button {
+        bottom: 1rem;
+        right: 1rem;
+        width: 52px;
+        height: 52px;
+        font-size: 1.125rem;
+    }
+    
+    .tooltip-text {
+        bottom: 65px;
+        right: -15px;
+    }
 }
